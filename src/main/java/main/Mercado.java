@@ -48,6 +48,7 @@ public class Mercado {
                 break;
             case 5:
                 System.out.println("Volte Sempre !!!");
+                System.exit(0);
             default:
                 System.out.println("Opção Inválida!");
                 menu();
@@ -66,6 +67,75 @@ public class Mercado {
         produtos.add(produto);
 
         System.out.println(produto.getNome() + " cadastrado com sucesso!!");
+        menu();
+    }
+    private static void listarProduto(){
+        if (produtos.size() > 0){
+            System.out.println("Lista de produtos: \n");
+
+            for (Produto p : produtos) {
+                System.out.println(p);
+            }
+        }else {
+            System.out.println("Nenhium produto cadastrado! ");
+        }
+        menu();
+    }
+
+    private static void comprarProduto(){
+       if (produtos.size() > 0){
+           System.out.println("Código do produto: \n");
+
+           System.out.println("--------------------Produtos Disponíveis--------------------");
+           for (Produto p : produtos) {
+               System.out.println(p + "\n");
+           }
+           int id = Integer.parseInt(input.next());
+           boolean isPresent = false;
+
+           for (Produto p : produtos){
+               if (p.getId() == id){
+                   int qtd = 0;
+                   try {
+                       qtd = carrinho.get(p);
+                       carrinho.put(p, qtd +1);
+                   }catch (NullPointerException e) {
+                       carrinho.put(p, 1);
+                   }
+                   System.out.println(p.getNome() + " adicionado ao carrinho.");
+                   isPresent = true;
+
+                   if (isPresent){
+                       System.out.println("Deseja adicionar mais algum produto ao carrinho? ");
+                       System.out.println("Digite 1 para sim, ou 0 para finalizar a compra. \n");
+                       int option = Integer.parseInt(input.next());
+
+                       if (option == 1){
+                           comprarProduto();
+                       }else {
+                           finalizarCompra();
+                       }
+                   }
+               }else {
+                   System.out.println("Produto não encontrado.");
+                   menu();
+               }
+           }
+       }else{
+           System.out.println("Não existem produtos cadastrados!");
+           menu();
+       }
+    }
+
+    private static void verCarrinho(){
+        System.out.println("-----Produtos no seu carrinho!-----");
+        if (carrinho.size() > 0){
+            for (Produto p : carrinho.keySet()){
+                System.out.println("Produto: "+ p + " \nQuantidade: " + carrinho.get(p));
+            }
+        }else {
+            System.out.println("Carrinho vazio!");
+        }
         menu();
     }
 }
