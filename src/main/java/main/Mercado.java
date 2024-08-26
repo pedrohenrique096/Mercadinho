@@ -1,6 +1,7 @@
 package main;
 
 import modelo.Produto;
+import utils.Utilitarios;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -77,7 +78,7 @@ public class Mercado {
                 System.out.println(p);
             }
         }else {
-            System.out.println("Nenhium produto cadastrado! ");
+            System.out.println("Nenhum produto cadastrado! ");
         }
         menu();
     }
@@ -137,5 +138,21 @@ public class Mercado {
             System.out.println("Carrinho vazio!");
         }
         menu();
+    }
+
+    private static void finalizarCompra(){
+        Double valorDaCompra = 0.0;
+        System.out.println("Seus produtos!");
+
+        for (Produto p : carrinho.keySet()){
+            int qtd = carrinho.get(p);
+            valorDaCompra += p.getPreco() * qtd;
+            System.out.println(p);
+            System.out.println("Quantidade: " + qtd);
+            System.out.println("--------------------");
+        }
+        System.out.println("O valor da sua compra é: "+ Utilitarios.doubleToString(valorDaCompra));
+        carrinho.clear();
+        System.out.println("Volte sempre e compre mais vezes!");
     }
 }

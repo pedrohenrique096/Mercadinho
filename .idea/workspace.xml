@@ -41,6 +41,7 @@
   <component name="RunManager">
     <configuration name="Mercado" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="main.Mercado" />
+      <module name="Mercadinho" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="main.*" />

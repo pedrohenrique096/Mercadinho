@@ -10,10 +10,10 @@ public class Produto {
     private Double preco;
 
     public Produto(String nome, Double preco) {
-        this.id =count;
+        this.id = count;
         this.nome = nome;
         this.preco = preco;
-        Produto.count =- 1;
+        Produto.count += 1;
 
     }
 
